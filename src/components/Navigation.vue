@@ -30,12 +30,12 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">LOGIN</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">SIGN UP</a>
-          </li>
+          <nav-item
+            v-for="(item, index) in userMenu"
+            :key="index"
+            :menuItem="userMenu[index].name"
+          >
+          </nav-item>
         </ul>
       </div>
     </nav>
@@ -92,6 +92,14 @@ export default {
         {
           name: "People",
           subItems: ["Popular People"]
+        }
+      ],
+      userMenu: [
+        {
+          name: "Login"
+        },
+        {
+          name: "Sign up"
         }
       ]
     };

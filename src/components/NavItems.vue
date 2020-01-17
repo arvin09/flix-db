@@ -11,13 +11,15 @@
       >{{ getUpperCaseMenuName }}</a
     >
     <div class="dropdown-menu" aria-labelledby="moiveDropdown">
-      <a
+      <router-link
         v-for="(subItem, index) in subItems"
         :key="index"
         class="dropdown-item"
         href="#"
-        >{{ subItem }}</a
+        :to="getRouterLink(subItem)"
       >
+        {{ subItem }}
+      </router-link>
     </div>
   </li>
 </template>
@@ -37,6 +39,11 @@ export default {
   computed: {
     getUpperCaseMenuName() {
       return this.menuItem.toString().toUpperCase();
+    }
+  },
+  methods: {
+    getRouterLink(item) {
+      return item.toLowerCase().replace(/ +?/g, "");
     }
   }
 };
@@ -63,36 +70,56 @@ export default {
   width: 500px;
   background: transparent;
   border: 0;
-}
-.dropdown-menu a {
-  display: inline-block;
+  a {
+    display: inline-block;
+  }
+  .dropdown-item {
+    width: auto;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .dropdown-item:hover {
+    background-color: transparent;
+    color: #ff0000;
+  }
 }
 
-.nav-item > a {
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 40px !important;
-}
+.nav-item {
+  > a {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 40px !important;
+    font-weight: bold;
+  }
 
-.nav-link {
-  font-weight: bold;
+  .dropdown-menu {
+    width: 500px;
+    background: transparent;
+    border: 0;
+    a {
+      display: inline-block;
+    }
+    .dropdown-item {
+      width: auto;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 14px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .dropdown-item:hover {
+      background-color: transparent;
+      color: #ff0000;
+    }
+  }
 }
 
 .dropdown-toggle::after {
   display: none;
-}
-
-.dropdown-item {
-  width: auto;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.dropdown-item:hover {
-  background-color: transparent;
-  color: red;
 }
 </style>
