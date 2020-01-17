@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Popular from "../views/Popular.vue";
 
 Vue.use(VueRouter);
 
@@ -8,12 +8,12 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    component: Popular
   },
   {
     path: "/popular",
     name: "popular",
-    component: Home
+    component: Popular
   },
   {
     path: "/toprated",
