@@ -16,4 +16,10 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+</style>

@@ -55,5 +55,6 @@ export default {
 
   border-top: 1px solid #c6c6c6;
   border-bottom: 1px solid #c6c6c6;
+  background-color: white;
 }
 </style>
