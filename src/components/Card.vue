@@ -2,15 +2,19 @@
   <div class="card mb-3" style="max-width: 540px;">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img :src="posterLink" class="card-img" alt="" />
+        <img :src="posterLink" class="card-img" alt />
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{ details.title }}</h5>
-          <p class="card-text">{{ trimSynopsis }}</p>
-          <p class="card-text">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </p>
+          <div>
+            <div class="rating">75%</div>
+            <div class="card-title">
+              <h5 class="title">{{ details.title }}</h5>
+              <h6 class="release-date">{{ formatedReleaseDate }}</h6>
+            </div>
+          </div>
+          <p class="card-synopsis">{{ trimSynopsis }}</p>
+          <p class="card-more-info">More Info</p>
         </div>
       </div>
     </div>
@@ -32,6 +36,10 @@ export default {
     };
   },
   computed: {
+    formatedReleaseDate() {
+      let date = new Date(this.details.release_date);
+      return date.toDateString().substr(4);
+    },
     trimSynopsis() {
       let overview = this.details.overview;
       if (overview.length > this.synopsisLength) {
@@ -47,11 +55,36 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 .card-body {
-  padding: 0.5rem;
   font-size: 14px;
+  .card-title {
+    margin-bottom: 2em;
+    .title {
+      margin-bottom: 0.2em;
+      font-size: 1.1em;
+    }
+    .release-date {
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.6);
+      line-height: 1em;
+    }
+  }
+  .card-more-info {
+    border-top: 1px solid #e3e3e3;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 1.25em;
+    padding-top: 0.5em;
+  }
+
+  .rating {
+    float: left;
+    padding: 12px;
+  }
 }
 </style>
