@@ -19,7 +19,6 @@
 
 <script>
 // @ is an alias to /src
-import appConfig from "../../config.json";
 import card from "@/components/Card.vue";
 export default {
   name: "home",
