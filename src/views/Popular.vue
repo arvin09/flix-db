@@ -30,7 +30,7 @@ export default {
     return {
       baseurl: "https://api.themoviedb.org/3/movie/popular/",
       params: {
-        api_key: appConfig.apiKey,
+        api_key: process.env.VUE_APP_API_KEY,
         language: "en-US",
         page: 1
       },
