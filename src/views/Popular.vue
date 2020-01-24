@@ -19,6 +19,7 @@
 
 <script>
 // @ is an alias to /src
+import appConfig from "../../config.json";
 import card from "@/components/Card.vue";
 export default {
   name: "home",
@@ -29,7 +30,7 @@ export default {
     return {
       baseurl: "https://api.themoviedb.org/3/movie/popular/",
       params: {
-        api_key: "4c2394362747c9c8be04f8a259496b4b",
+        api_key: appConfig.apiKey,
         language: "en-US",
         page: 1
       },

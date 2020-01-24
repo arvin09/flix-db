@@ -8,7 +8,7 @@
         <div class="card-body">
           <div>
             <div class="rating">
-              <span>{{votePercentage}}</span>
+              <span>{{ votePercentage }}</span>
               <svg
                 class="bi bi-heart-fill"
                 width="1em"
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     votePercentage() {
-        return `${this.details.vote_average * 10}%`
+      return `${this.details.vote_average * 10}%`;
     },
     formatedReleaseDate() {
       let date = new Date(this.details.release_date);
@@ -106,8 +106,8 @@ export default {
     padding: 12px;
 
     svg {
-        font-size: 32px;
-        color: red;
+      font-size: 32px;
+      color: red;
     }
   }
 }
