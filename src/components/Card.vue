@@ -7,7 +7,23 @@
       <div class="col-md-8">
         <div class="card-body">
           <div>
-            <div class="rating">75%</div>
+            <div class="rating">
+              <span>{{votePercentage}}</span>
+              <svg
+                class="bi bi-heart-fill"
+                width="1em"
+                height="1em"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
             <div class="card-title">
               <h5 class="title">{{ details.title }}</h5>
               <h6 class="release-date">{{ formatedReleaseDate }}</h6>
@@ -36,6 +52,9 @@ export default {
     };
   },
   computed: {
+    votePercentage() {
+        return `${this.details.vote_average * 10}%`
+    },
     formatedReleaseDate() {
       let date = new Date(this.details.release_date);
       return date.toDateString().substr(4);
@@ -79,12 +98,17 @@ export default {
     left: 0;
     width: 100%;
     padding-left: 1.25em;
-    padding-top: 0.5em;
+    padding-top: 0.8em;
   }
 
   .rating {
     float: left;
     padding: 12px;
+
+    svg {
+        font-size: 32px;
+        color: red;
+    }
   }
 }
 </style>
