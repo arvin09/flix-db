@@ -6,15 +6,15 @@
 <script>
 import common from "./Common.vue";
 export default {
-  name: "popular",
+  name: "upcoming",
   components: {
     common
   },
   data() {
     return {
-      title: "Popular",
+      title: "Up Coming",
       apiOptions: {
-        routes: "movie/popular",
+        routes: "movie/upcoming",
         language: "en-US",
         page: 1
       }
