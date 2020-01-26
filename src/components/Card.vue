@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-4" style="max-width: 540px;">
     <div class="row no-gutters">
       <div class="col-md-4">
         <img :src="posterLink" class="card-img" alt />
@@ -8,7 +8,7 @@
         <div class="card-body">
           <div>
             <div class="rating">
-              <span>{{ votePercentage }}</span>
+              <span class="percent">{{ votePercentage }}</span>
               <svg
                 class="bi bi-heart-fill"
                 width="1em"
@@ -79,7 +79,9 @@ export default {
 }
 .card-body {
   font-size: 14px;
+  padding: 1em;
   .card-title {
+    padding-top: 10px;
     margin-bottom: 2em;
     .title {
       margin-bottom: 0.2em;
@@ -87,6 +89,7 @@ export default {
     }
     .release-date {
       font-size: 16px;
+      font-weight: 100;
       color: rgba(0, 0, 0, 0.6);
       line-height: 1em;
     }
@@ -103,10 +106,17 @@ export default {
 
   .rating {
     float: left;
-    padding: 12px;
+
+    .percent {
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      color: white;
+      font-weight: bold;
+    }
 
     svg {
-      font-size: 32px;
+      font-size: 60px;
       color: red;
     }
   }

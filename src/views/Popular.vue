@@ -1,6 +1,6 @@
 <template>
-  <div class="home container">
-    <h5>Popular Movies</h5>
+  <div class="container">
+    <div class="title"><h5>Popular Movies</h5></div>
     <div
       class="row"
       v-for="(movieList, groupIndex) in groupedMovies"
@@ -69,4 +69,8 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.title {
+  padding: 15px 0;
+}
+</style>
