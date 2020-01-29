@@ -42,7 +42,10 @@ export default {
   },
   methods: {
     getRouterLink(item) {
-      return item.toLowerCase().replace(/ +?/g, "");
+      return `/${this.menuItem.toLowerCase()}/${item
+        .toLowerCase()
+        .replace(/ +?/g, "")}`;
+      // return item.toLowerCase().replace(/ +?/g, "");
     }
   }
 };

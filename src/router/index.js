@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Popular from "../views/Popular.vue";
+import Movies from "../views/Movies.vue";
 
 Vue.use(VueRouter);
 
@@ -8,33 +8,36 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Popular
+    component: Movies
   },
   {
-    path: "/popular",
-    name: "popular",
-    component: Popular
-  },
-  {
-    path: "/toprated",
-    name: "toprated",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "toprated" */ "../views/TopRated.vue")
-  },
-  {
-    path: "/nowplaying",
-    name: "nowplaying",
-    component: () =>
-      import(/* webpackChunkName: "nowplaying" */ "../views/NowPlaying.vue")
-  },
-  {
-    path: "/upcoming",
-    name: "upcoming",
-    component: () =>
-      import(/* webpackChunkName: "upcoming" */ "../views/Upcoming.vue")
+    path: "/movie",
+    name: "movie",
+    component: Movies,
+
+    // Child routes
+    children: [
+      {
+        path: "popular",
+        name: "popular",
+        component: () => import("../views/Popular.vue")
+      },
+      {
+        path: "toprated",
+        name: "toprated",
+        component: () => import("../views/TopRated.vue")
+      },
+      {
+        path: "nowplaying",
+        name: "nowplaying",
+        component: () => import("../views/NowPlaying.vue")
+      },
+      {
+        path: "upcoming",
+        name: "upcoming",
+        component: () => import("../views/Upcoming.vue")
+      }
+    ]
   }
 ];
 
