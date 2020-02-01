@@ -17,7 +17,7 @@
         href="#"
         :to="getRouterLink(subItem)"
       >
-        {{ subItem }}
+        {{ getSubMenuItem(subItem) }}
       </router-link>
     </div>
   </li>
@@ -36,16 +36,21 @@ export default {
     }
   },
   computed: {
+    mainMenu() {
+      return `/${this.menuItem.toLowerCase()}`;
+    },
     getUpperCaseMenuName() {
       return this.menuItem.toString().toUpperCase();
     }
   },
   methods: {
+    getSubMenuItem(item) {
+      return item.replace("_", " ");
+    },
     getRouterLink(item) {
       return `/${this.menuItem.toLowerCase()}/${item
         .toLowerCase()
         .replace(/ +?/g, "")}`;
-      // return item.toLowerCase().replace(/ +?/g, "");
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container page-section">
     <div class="title">
       <h5>{{ title }}</h5>
     </div>
@@ -8,11 +8,7 @@
       v-for="(movieList, groupIndex) in groupedMovies"
       :key="groupIndex"
     >
-      <div
-        v-for="(movie, movieIndex) in movieList"
-        :key="movieIndex"
-        class="col-sm-6"
-      >
+      <div v-for="movie in movieList" :key="movie.id" class="col-sm-6">
         <card :details="movie"></card>
       </div>
     </div>
@@ -23,7 +19,7 @@
 // @ is an alias to /src
 import card from "@/components/Card.vue";
 export default {
-  name: "common",
+  name: "cards",
   components: {
     card
   },
@@ -32,23 +28,22 @@ export default {
       type: String,
       default: ""
     },
-    apiOptions: {
-      type: Object,
-      default: () => ({}) // routes, lang, page
+    route: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-      baseurl: "https://api.themoviedb.org/3/",
+      baseurl: "https://api.themoviedb.org/3",
       api_key: process.env.VUE_APP_API_KEY,
+      language: "en-US",
+      page: 1,
       response: {},
       results: {}
     };
   },
   computed: {
-    apiUrl() {
-      return `${this.baseurl}${this.apiOptions.routes}?api_key=${this.api_key}&language=${this.apiOptions.language}&page=${this.apiOptions.page}`;
-    },
     groupedMovies() {
       let movies = [];
       if (this.results.length) {
@@ -65,15 +60,33 @@ export default {
     }
   },
   mounted() {
-    fetch(this.apiUrl)
-      .then(response => {
-        return response.json();
-      })
-      .then(movieJson => {
-        console.log(movieJson);
-        this.response = movieJson;
-        this.results = movieJson.results;
-      });
+    this.getData({ route: this.route });
+  },
+  methods: {
+    setNewRoute(route) {
+      this.getData({ route: route });
+    },
+    setPage(page) {
+      this.getData({ page });
+    },
+
+    setLanguage(language) {
+      this.getData({ language });
+    },
+
+    apiUrl(params) {
+      return `${this.baseurl}${params.route}?api_key=${this.api_key}&language=${this.language}&page=${this.page}`;
+    },
+    getData(route) {
+      fetch(this.apiUrl(route))
+        .then(response => {
+          return response.json();
+        })
+        .then(movieJson => {
+          this.response = movieJson;
+          this.results = movieJson.results;
+        });
+    }
   }
 };
 </script>

@@ -55,11 +55,11 @@ export default {
       menu: [
         {
           name: "Movie",
-          subItems: ["Popular", "Top Rated", "Up Coming", "Now Playing"]
+          subItems: ["Popular", "Top_Rated", "Up Coming", "Now_Playing"]
         },
         {
           name: "Tv Shows",
-          subItems: ["Popular", "Top Rated", "On TV", "Aired Today"]
+          subItems: ["Popular", "Top_Rated", "On TV", "Aired Today"]
         },
         {
           name: "People",

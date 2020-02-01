@@ -117,7 +117,7 @@ export default {
 
     svg {
       font-size: 60px;
-      color: red;
+      color: #d80a0a;
     }
   }
 }
