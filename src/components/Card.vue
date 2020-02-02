@@ -1,63 +1,87 @@
 <template>
-  <div class="card mb-4" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img
-          v-if="posterLink"
-          :src="posterLink"
-          class="card-img"
-          alt="no Image"
-        />
-        <div v-else class="no-image-holder">
-          <img src="../assets/no-image.svg" />
-        </div>
+  <div>
+    <div v-if="isPeople" class="card" style="width: 18rem;">
+      <img v-if="posterLink" :src="posterLink" class="card-img-top" alt="" />
+      <div
+        v-else
+        class="no-image-holder people-no-image"
+        style="line-height:429px"
+      >
+        <img src="../assets/no-image.svg" />
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <div>
-            <div class="rating">
-              <span class="percent">{{ votePercentage }}</span>
-              <svg
-                class="bi bi-heart-fill"
-                width="1em"
-                height="1em"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </div>
-            <div class="card-title">
-              <h5 class="title">{{ details.title || details.name }}</h5>
-              <h6 class="release-date">{{ formatedReleaseDate }}</h6>
-            </div>
+      <div class="card-body people-body">
+        <h5 class="card-title people-title">{{ details.name }}</h5>
+        <p class="card-text peole-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+      </div>
+    </div>
+    <div v-else class="card mb-4" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img
+            v-if="posterLink"
+            :src="posterLink"
+            class="card-img"
+            alt="no Image"
+          />
+          <div v-else class="no-image-holder">
+            <img src="../assets/no-image.svg" />
           </div>
-          <p class="card-synopsis">{{ trimSynopsis }}</p>
-          <p class="card-more-info">More Info</p>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div>
+              <div class="rating">
+                <span class="percent">{{ votePercentage }}</span>
+                <svg
+                  class="bi bi-heart-fill"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div class="card-title">
+                <h5 class="title">{{ details.title || details.name }}</h5>
+                <h6 class="release-date">{{ formatedReleaseDate }}</h6>
+              </div>
+            </div>
+            <p class="card-synopsis">{{ trimSynopsis }}</p>
+            <p class="card-more-info">More Info</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { pick, values } from "lodash";
 export default {
   name: "card",
   props: {
     details: {
       type: Object,
       default: () => ({})
+    },
+    isPeople: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
     return {
       baseImageUrl: "https://image.tmdb.org/t/p/w500",
       defaultSynopsis:
-        "They is no synopsis present at the moment we wil update it soon...",
+        "There is no synopsis present at the moment we wil update it soon...",
       synopsisLength: 250
     };
   },
@@ -82,7 +106,13 @@ export default {
       if (this.details.poster_path) {
         return `${this.baseImageUrl}${this.details.poster_path}`;
       }
+      if (this.details.profile_path) {
+        return `${this.baseImageUrl}${this.details.profile_path}`;
+      }
       return null;
+    },
+    knowForList() {
+      return values(pick(this.details.known_for, ["name", "title"])).join(",");
     }
   }
 };

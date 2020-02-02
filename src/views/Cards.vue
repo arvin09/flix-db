@@ -8,8 +8,8 @@
       v-for="(movieList, groupIndex) in groupedMovies"
       :key="groupIndex"
     >
-      <div v-for="movie in movieList" :key="movie.id" class="col-sm-6">
-        <card :details="movie"></card>
+      <div v-for="movie in movieList" :key="movie.id" :class="cardInRow">
+        <card :details="movie" :isPeople="isPeople"></card>
       </div>
     </div>
   </div>
@@ -40,7 +40,8 @@ export default {
       language: "en-US",
       page: 1,
       response: {},
-      results: {}
+      results: {},
+      isPeople: false
     };
   },
   computed: {
@@ -50,13 +51,19 @@ export default {
         let movieRow = [];
         this.results.forEach((value, index) => {
           movieRow.push(value);
-          if ((index + 1) % 2 == 0) {
+          if ((index + 1) % this.colCount == 0) {
             movies.push(movieRow);
             movieRow = [];
           }
         });
       }
       return movies;
+    },
+    colCount() {
+      return this.isPeople ? 3 : 2;
+    },
+    cardInRow() {
+      return this.isPeople ? "col-sm-4" : "col-sm-6";
     }
   },
   mounted() {
@@ -78,6 +85,7 @@ export default {
       return `${this.baseurl}${params.route}?api_key=${this.api_key}&language=${this.language}&page=${this.page}`;
     },
     getData(route) {
+      this.isPeople = route.route.indexOf("person") > -1 ? true : false;
       fetch(this.apiUrl(route))
         .then(response => {
           return response.json();
