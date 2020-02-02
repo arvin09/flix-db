@@ -11,7 +11,7 @@ const routes = [
     component: Movie
   },
   {
-    path: "/movie/:category",
+    path: "/*/:category",
     name: "movie",
     component: Movie
   }

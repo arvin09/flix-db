@@ -58,12 +58,12 @@ export default {
           subItems: ["Popular", "Top_Rated", "Up Coming", "Now_Playing"]
         },
         {
-          name: "Tv Shows",
-          subItems: ["Popular", "Top_Rated", "On TV", "Aired Today"]
+          name: "Tv",
+          subItems: ["Popular", "Top_Rated", "On_the_Air", "Airing_Today"]
         },
         {
-          name: "People",
-          subItems: ["Popular People"]
+          name: "Person",
+          subItems: ["Popular"]
         }
       ],
       userMenu: [
