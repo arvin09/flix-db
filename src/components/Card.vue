@@ -2,7 +2,15 @@
   <div class="card mb-4" style="max-width: 540px;">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img :src="posterLink" class="card-img" alt />
+        <img
+          v-if="posterLink"
+          :src="posterLink"
+          class="card-img"
+          alt="no Image"
+        />
+        <div v-else class="no-image-holder">
+          <img src="../assets/no-image.svg" />
+        </div>
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -21,11 +29,11 @@
                   fill-rule="evenodd"
                   d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z"
                   clip-rule="evenodd"
-                ></path>
+                />
               </svg>
             </div>
             <div class="card-title">
-              <h5 class="title">{{ details.title }}</h5>
+              <h5 class="title">{{ details.title || details.name }}</h5>
               <h6 class="release-date">{{ formatedReleaseDate }}</h6>
             </div>
           </div>
@@ -48,6 +56,8 @@ export default {
   data() {
     return {
       baseImageUrl: "https://image.tmdb.org/t/p/w500",
+      defaultSynopsis:
+        "They is no synopsis present at the moment we wil update it soon...",
       synopsisLength: 250
     };
   },
@@ -56,18 +66,23 @@ export default {
       return `${this.details.vote_average * 10}%`;
     },
     formatedReleaseDate() {
-      let date = new Date(this.details.release_date);
+      const date = new Date(
+        this.details.release_date || this.details.first_air_date
+      );
       return date.toDateString().substr(4);
     },
     trimSynopsis() {
-      let overview = this.details.overview;
+      let overview = this.details.overview || this.defaultSynopsis;
       if (overview.length > this.synopsisLength) {
         overview = `${overview.substr(0, this.synopsisLength)} ...`;
       }
       return overview;
     },
     posterLink() {
-      return `${this.baseImageUrl}${this.details.poster_path}`;
+      if (this.details.poster_path) {
+        return `${this.baseImageUrl}${this.details.poster_path}`;
+      }
+      return null;
     }
   }
 };
@@ -76,6 +91,23 @@ export default {
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+}
+.no-image-holder {
+  display: inline-block;
+  text-align: center;
+  background-color: #dbdbdb;
+  color: #b5b5b5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #d7d7d7;
+  width: 100%;
+  height: 100%;
+  line-height: 269px;
+
+  img {
+    height: 75px;
+    widows: 75px;
+  }
 }
 .card-body {
   font-size: 14px;
