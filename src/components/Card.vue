@@ -1,11 +1,15 @@
 <template>
   <div>
-    <div v-if="isPeople" class="card" style="width: 18rem;">
+    <div
+      v-if="isPeople"
+      class="card"
+      style="width: 16rem; margin-bottom: 20px;"
+    >
       <img v-if="posterLink" :src="posterLink" class="card-img-top" alt="" />
       <div
         v-else
         class="no-image-holder people-no-image"
-        style="line-height:429px"
+        style="line-height:381.5px"
       >
         <img src="../assets/no-image.svg" />
       </div>
@@ -118,6 +122,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.people-title {
+  margin-bottom: 0 !important;
+}
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;

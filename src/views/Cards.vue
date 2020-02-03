@@ -60,10 +60,10 @@ export default {
       return movies;
     },
     colCount() {
-      return this.isPeople ? 3 : 2;
+      return this.isPeople ? 4 : 2;
     },
     cardInRow() {
-      return this.isPeople ? "col-sm-4" : "col-sm-6";
+      return this.isPeople ? "col-sm-3" : "col-sm-6";
     }
   },
   mounted() {
