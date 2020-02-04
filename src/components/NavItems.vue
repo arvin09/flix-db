@@ -23,6 +23,7 @@
   </li>
 </template>
 <script>
+import labels from "@/config/labels.json";
 export default {
   name: "nav-item",
   props: {
@@ -40,12 +41,12 @@ export default {
       return `/${this.menuItem.toLowerCase()}`;
     },
     getUpperCaseMenuName() {
-      return this.menuItem.toString().toUpperCase();
+      return labels["en"][this.menuItem].toUpperCase();
     }
   },
   methods: {
     getSubMenuItem(item) {
-      return item.replace("_", " ");
+      return labels["en"][item];
     },
     getRouterLink(item) {
       return `/${this.menuItem.toLowerCase()}/${item

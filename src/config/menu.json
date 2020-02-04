@@ -1,0 +1,36 @@
+{
+    "menu": [
+        {
+            "name": "movie",
+            "subItems": [
+                "popular",
+                "top_rated",
+                "upcoming",
+                "now_playing"
+            ]
+        },
+        {
+            "name": "tv",
+            "subItems": [
+                "popular",
+                "top_rated",
+                "on_the_air",
+                "airing_today"
+            ]
+        },
+        {
+            "name": "person",
+            "subItems": [
+                "popular"
+            ]
+        }
+    ],
+    "userMenu": [
+        {
+            "name": "Login"
+        },
+        {
+            "name": "Sign up"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "en": {
+        "movie": "Movies",
+        "popular": "Popular",
+        "top_rated": "Top Rated",
+        "upcoming": "Up Coming",
+        "now_playing": "Now Playing",
+        "tv": "TV Shows",
+        "on_the_air": "On Air",
+        "airing_today": "Airing Today",
+        "person": "People"
+    }
+}

@@ -45,6 +45,7 @@
 <script>
 import navItem from "@/components/NavItems.vue";
 import search from "@/components/Search.vue";
+import config from "@/config/menu.json";
 export default {
   components: {
     navItem,
@@ -52,28 +53,8 @@ export default {
   },
   data() {
     return {
-      menu: [
-        {
-          name: "Movie",
-          subItems: ["Popular", "Top_Rated", "Up Coming", "Now_Playing"]
-        },
-        {
-          name: "Tv",
-          subItems: ["Popular", "Top_Rated", "On_the_Air", "Airing_Today"]
-        },
-        {
-          name: "Person",
-          subItems: ["Popular"]
-        }
-      ],
-      userMenu: [
-        {
-          name: "Login"
-        },
-        {
-          name: "Sign up"
-        }
-      ]
+      menu: config.menu,
+      userMenu: config.userMenu
     };
   }
 };

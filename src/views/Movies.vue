@@ -5,7 +5,8 @@
 </template>
 <script>
 import cardsView from "./Cards.vue";
-import { upperFirst } from "lodash";
+import labels from "@/config/labels.json";
+// import { upperFirst } from "lodash";
 
 export default {
   name: "movie",
@@ -33,8 +34,9 @@ export default {
       this.$refs.cardsView.setNewRoute(path);
     },
     transformTitle(path) {
-      const subTitle = path.split("/")[2].replace("_", " ");
-      this.title = upperFirst(subTitle);
+      const mainRoute = path.split("/")[1];
+      const subRoute = path.split("/")[2];
+      this.title = `${labels["en"][subRoute]} ${labels["en"][mainRoute]}`;
     }
   }
 };
