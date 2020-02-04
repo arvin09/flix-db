@@ -15,10 +15,6 @@
       </div>
       <div class="card-body people-body">
         <h5 class="card-title people-title">{{ details.name }}</h5>
-        <p class="card-text peole-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </p>
       </div>
     </div>
     <div v-else class="card mb-4" style="max-width: 540px;">
@@ -68,7 +64,6 @@
   </div>
 </template>
 <script>
-import { pick, values } from "lodash";
 export default {
   name: "card",
   props: {
@@ -114,9 +109,6 @@ export default {
         return `${this.baseImageUrl}${this.details.profile_path}`;
       }
       return null;
-    },
-    knowForList() {
-      return values(pick(this.details.known_for, ["name", "title"])).join(",");
     }
   }
 };
