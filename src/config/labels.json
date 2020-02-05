@@ -1,15 +1,15 @@
 {
     "en": {
-        "movie": "Movies",
-        "popular": "Popular",
-        "top_rated": "Top Rated",
-        "upcoming": "Up Coming",
-        "now_playing": "Now Playing",
-        "tv": "TV Shows",
-        "on_the_air": "On Air",
         "airing_today": "Airing Today",
-        "person": "People",
         "login": "Login",
-        "signUp": "Sign Up"
+        "movie": "Movies",
+        "now_playing": "Now Playing",
+        "on_the_air": "On Air",
+        "person": "People",
+        "popular": "Popular",
+        "signUp": "Sign Up",
+        "top_rated": "Top Rated",
+        "tv": "TV Shows",
+        "upcoming": "Up Coming"
     }
 }
