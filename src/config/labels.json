@@ -8,6 +8,8 @@
         "tv": "TV Shows",
         "on_the_air": "On Air",
         "airing_today": "Airing Today",
-        "person": "People"
+        "person": "People",
+        "login": "Login",
+        "signUp": "Sign Up"
     }
 }
