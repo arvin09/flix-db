@@ -2,6 +2,7 @@
   <div class="container page-section">
     <div class="title">
       <h5>{{ title }}</h5>
+      <pagination></pagination>
     </div>
     <div
       class="row"
@@ -12,16 +13,21 @@
         <card :details="movie" :isPeople="isPeople"></card>
       </div>
     </div>
+    <div class="bottom-pagination">
+      <pagination></pagination>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import card from "@/components/Card.vue";
+import pagination from "@/components/Pagination.vue";
 export default {
   name: "cards",
   components: {
-    card
+    card,
+    pagination
   },
   props: {
     title: {
@@ -101,5 +107,14 @@ export default {
 <style lang="scss" scoped>
 .title {
   padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-pagination {
+  text-align: right;
+  .pagination {
+    display: inline-block;
+  }
 }
 </style>

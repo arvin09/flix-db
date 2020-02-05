@@ -6,7 +6,6 @@
 <script>
 import cardsView from "./Cards.vue";
 import labels from "@/config/labels.json";
-// import { upperFirst } from "lodash";
 
 export default {
   name: "movie",
