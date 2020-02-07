@@ -3,7 +3,8 @@
     <div class="title">
       <h5>{{ title }}</h5>
       <pagination
-        @page-changed="handlePageChange($event)"
+        ref="topPaginator"
+        @page-changed="handlePageChange($event, 'top')"
         :totalPages="totalPages"
       ></pagination>
     </div>
@@ -18,7 +19,8 @@
     </div>
     <div class="bottom-pagination">
       <pagination
-        @page-changed="handlePageChange($event)"
+        ref="bottomPaginator"
+        @page-changed="handlePageChange($event, bottom)"
         :totalPages="totalPages"
       ></pagination>
     </div>
@@ -83,7 +85,12 @@ export default {
     this.getData({ route: this.route });
   },
   methods: {
-    handlePageChange(page) {
+    handlePageChange(page, instance) {
+      if (instance === "top") {
+        this.$refs.bottomPaginator.setCurrentPage(page);
+      } else {
+        this.$refs.bottomPaginator.setCurrentPage(page);
+      }
       console.log("the current page is", page);
     },
     setNewRoute(route) {

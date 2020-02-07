@@ -124,6 +124,9 @@ export default {
     }
   },
   methods: {
+    setCurrentPage(page) {
+      this.current = page;
+    },
     changePage(page) {
       switch (page) {
         case "first":
