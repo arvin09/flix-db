@@ -21,7 +21,12 @@
           <span aria-hidden="true">First</span>
         </a>
       </li>
-      <li v-for="page in pages" :key="page" class="page-item">
+      <li
+        v-for="page in pages"
+        :key="page"
+        :class="current === page ? 'active' : ''"
+        class="page-item"
+      >
         <a class="page-link" @click="changePage(page)" href="#">
           {{ page }}
         </a>

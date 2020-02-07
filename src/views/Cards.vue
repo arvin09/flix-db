@@ -41,10 +41,6 @@ export default {
     title: {
       type: String,
       default: ""
-    },
-    route: {
-      type: String,
-      default: ""
     }
   },
   data() {
@@ -56,7 +52,8 @@ export default {
       response: {},
       results: {},
       isPeople: false,
-      totalPages: 0
+      totalPages: 0,
+      currentRoute: ""
     };
   },
   computed: {
@@ -89,15 +86,20 @@ export default {
       if (instance === "top") {
         this.$refs.bottomPaginator.setCurrentPage(page);
       } else {
-        this.$refs.bottomPaginator.setCurrentPage(page);
+        this.$refs.topPaginator.setCurrentPage(page);
       }
-      console.log("the current page is", page);
+      this.setPage(page);
     },
     setNewRoute(route) {
+      this.currentRoute = route;
+      this.page = 1;
+      this.$refs.bottomPaginator.setCurrentPage(this.page);
+      this.$refs.topPaginator.setCurrentPage(this.page);
       this.getData({ route: route });
     },
     setPage(page) {
-      this.getData({ page });
+      this.page = page;
+      this.getData({ page: page });
     },
 
     setLanguage(language) {
@@ -105,10 +107,13 @@ export default {
     },
 
     apiUrl(params) {
-      return `${this.baseurl}${params.route}?api_key=${this.api_key}&language=${this.language}&page=${this.page}`;
+      return `${this.baseurl}${params.route || this.currentRoute}?api_key=${
+        this.api_key
+      }&language=${this.language}&page=${params.page || this.page}`;
     },
     getData(route) {
-      this.isPeople = route.route.indexOf("person") > -1 ? true : false;
+      console.log(this.$route.params.category);
+      this.isPeople = this.currentRoute.indexOf("person") > -1 ? true : false;
       fetch(this.apiUrl(route))
         .then(response => {
           return response.json();
@@ -123,6 +128,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.pagination {
+  z-index: 0;
+}
 .title {
   padding: 15px 0;
   display: flex;
