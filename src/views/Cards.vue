@@ -2,7 +2,10 @@
   <div class="container page-section">
     <div class="title">
       <h5>{{ title }}</h5>
-      <pagination></pagination>
+      <pagination
+        @page-changed="handlePageChange($event)"
+        :totalPages="totalPages"
+      ></pagination>
     </div>
     <div
       class="row"
@@ -14,7 +17,10 @@
       </div>
     </div>
     <div class="bottom-pagination">
-      <pagination></pagination>
+      <pagination
+        @page-changed="handlePageChange($event)"
+        :totalPages="totalPages"
+      ></pagination>
     </div>
   </div>
 </template>
@@ -47,7 +53,8 @@ export default {
       page: 1,
       response: {},
       results: {},
-      isPeople: false
+      isPeople: false,
+      totalPages: 0
     };
   },
   computed: {
@@ -76,6 +83,9 @@ export default {
     this.getData({ route: this.route });
   },
   methods: {
+    handlePageChange(page) {
+      console.log("the current page is", page);
+    },
     setNewRoute(route) {
       this.getData({ route: route });
     },
@@ -98,6 +108,7 @@ export default {
         })
         .then(movieJson => {
           this.response = movieJson;
+          this.totalPages = this.response.total_pages;
           this.results = movieJson.results;
         });
     }
