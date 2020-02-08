@@ -1,7 +1,7 @@
 <template>
   <nav aria-label="Page navigation" class="pagination">
     <ul class="pagination">
-      <li class="page-item">
+      <li class="page-item" :class="{ disabled: isFirstPage }">
         <a
           class="page-link"
           @click="changePage('previous')"
@@ -11,7 +11,7 @@
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item">
+      <li class="page-item" :class="{ disabled: isFirstPage }">
         <a
           class="page-link"
           @click="changePage('first')"
@@ -24,14 +24,14 @@
       <li
         v-for="page in pages"
         :key="page"
-        :class="current === page ? 'active' : ''"
+        :class="{ active: current === page }"
         class="page-item"
       >
         <a class="page-link" @click="changePage(page)" href="#">
           {{ page }}
         </a>
       </li>
-      <li class="page-item">
+      <li class="page-item" :class="{ disabled: isLastPage }">
         <a
           class="page-link"
           @click="changePage('last')"
@@ -41,7 +41,7 @@
           <span aria-hidden="true">Last</span>
         </a>
       </li>
-      <li class="page-item">
+      <li class="page-item" :class="{ disabled: isLastPage }">
         <a
           class="page-link"
           @click="changePage('next')"
@@ -158,3 +158,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.disabled {
+  opacity: 0.5;
+}
+</style>
