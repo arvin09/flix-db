@@ -1,6 +1,6 @@
 <template>
   <div class="container page-section">
-    <div class="title">
+    <div class="title" v-if="results.length">
       <h5>{{ title }}</h5>
       <pagination
         ref="topPaginator"
@@ -17,7 +17,7 @@
         <card :details="movie" :isPeople="isPeople"></card>
       </div>
     </div>
-    <div class="bottom-pagination">
+    <div class="bottom-pagination" v-if="results.length">
       <pagination
         ref="bottomPaginator"
         @page-changed="handlePageChange($event, bottom)"
@@ -93,8 +93,6 @@ export default {
     setNewRoute(route) {
       this.currentRoute = route;
       this.page = 1;
-      this.$refs.bottomPaginator.setCurrentPage(this.page);
-      this.$refs.topPaginator.setCurrentPage(this.page);
       this.getData({ route: route });
     },
     setPage(page) {
@@ -122,6 +120,8 @@ export default {
           this.response = movieJson;
           this.totalPages = this.response.total_pages;
           this.results = movieJson.results;
+          this.$refs.bottomPaginator.setCurrentPage(this.page);
+          this.$refs.topPaginator.setCurrentPage(this.page);
         });
     }
   }
