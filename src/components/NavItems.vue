@@ -77,6 +77,8 @@ export default {
 .dropdown-menu {
   width: 500px;
   background: transparent;
+  padding: 0;
+  line-height: 1;
   border: 0;
   a {
     display: inline-block;

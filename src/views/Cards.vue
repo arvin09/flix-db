@@ -132,7 +132,8 @@ export default {
   z-index: 0;
 }
 .title {
-  padding: 15px 0;
+  padding-top: 10px;
+  padding-bottom: 0;
   display: flex;
   justify-content: space-between;
 }

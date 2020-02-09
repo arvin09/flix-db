@@ -69,6 +69,6 @@ nav {
     text-align: left;
   }
 
-  height: 110px;
+  height: 65px;
 }
 </style>
