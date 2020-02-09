@@ -35,20 +35,7 @@
             <div>
               <div class="rating">
                 <span class="percent">{{ votePercentage }}</span>
-                <svg
-                  class="bi bi-heart-fill"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 3.314C14.438-1.248 25.534 6.735 10 17-5.534 6.736 5.562-1.248 10 3.314z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <img src="../assets/heart.svg" />
               </div>
               <div class="card-title">
                 <h5 class="title">{{ details.title || details.name }}</h5>
@@ -174,11 +161,6 @@ export default {
       top: 30px;
       color: white;
       font-weight: bold;
-    }
-
-    svg {
-      font-size: 60px;
-      color: #d80a0a;
     }
   }
 }
