@@ -69,11 +69,10 @@
 
 .container-login {
   background-image: url("../assets/login-bg.jpg");
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
   font-family: "Numans", sans-serif;
-  height: 100%;
   align-content: center;
 }
 
