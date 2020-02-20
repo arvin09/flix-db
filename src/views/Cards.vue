@@ -110,7 +110,9 @@ export default {
       }&language=${this.language}&page=${params.page || this.page}`;
     },
     getData(route) {
-      console.log(this.$route.params.category);
+      if (!route.route || route.route === "/login") {
+        return;
+      }
       this.isPeople = this.currentRoute.indexOf("person") > -1 ? true : false;
       fetch(this.apiUrl(route))
         .then(response => {
@@ -120,8 +122,10 @@ export default {
           this.response = movieJson;
           this.totalPages = this.response.total_pages;
           this.results = movieJson.results;
-          this.$refs.bottomPaginator.setCurrentPage(this.page);
-          this.$refs.topPaginator.setCurrentPage(this.page);
+          if (this.$refs.bottomPaginator && this.$refs.topPaginator) {
+            this.$refs.bottomPaginator.setCurrentPage(this.page);
+            this.$refs.topPaginator.setCurrentPage(this.page);
+          }
         });
     }
   }

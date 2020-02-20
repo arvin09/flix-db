@@ -30,7 +30,9 @@ export default {
   methods: {
     updateCategory(path) {
       this.transformTitle(path);
-      this.$refs.cardsView.setNewRoute(path);
+      if (this.$refs.cardsView) {
+        this.$refs.cardsView.setNewRoute(path);
+      }
     },
     transformTitle(path) {
       const mainRoute = path.split("/")[1];

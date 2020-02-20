@@ -7,8 +7,12 @@
       role="button"
       aria-haspopup="true"
       aria-expanded="false"
-      >{{ getUpperCaseMenuName }}</a
     >
+      <span v-if="hasSubtems">{{ getUpperCaseMenuName }} </span>
+      <router-link v-else :to="mainMenu" class="nav-link">
+        {{ getUpperCaseMenuName }}
+      </router-link>
+    </a>
     <div class="dropdown-menu" aria-labelledby="moiveDropdown">
       <router-link
         v-for="(subItem, index) in subItems"
@@ -34,9 +38,16 @@ export default {
     subItems: {
       type: Array,
       default: () => []
+    },
+    route: {
+      type: String,
+      default: ""
     }
   },
   computed: {
+    hasSubtems() {
+      return this.subItems.length;
+    },
     mainMenu() {
       return `/${this.menuItem.toLowerCase()}`;
     },
