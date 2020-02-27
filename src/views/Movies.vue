@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     updateCategory(path) {
+      this.route = path;
       this.transformTitle(path);
       if (this.$refs.cardsView) {
         this.$refs.cardsView.setNewRoute(path);

@@ -41,6 +41,10 @@ export default {
     title: {
       type: String,
       default: ""
+    },
+    route: {
+      type: String,
+      default: ""
     }
   },
   data() {
@@ -97,7 +101,7 @@ export default {
     },
     setPage(page) {
       this.page = page;
-      this.getData({ page: page });
+      this.getData({ page: page, route: this.route });
     },
 
     setLanguage(language) {
