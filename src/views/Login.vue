@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header">
           <h3>{{ routeName }}</h3>
-          <div v-if="isLogin" class="d-flex justify-content-end social_icon">
+          <div class="d-flex justify-content-end social_icon">
             <span>
               <i class="fab fa-facebook-square"></i>
             </span>
@@ -91,6 +91,12 @@
           <!-- <div class="d-flex justify-content-center">
             <a href="#">Forgot your password?</a>
           </div>-->
+        </div>
+        <div v-else class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Already have an account?
+            <router-link to="/login">Login</router-link>
+          </div>
         </div>
       </div>
     </div>
