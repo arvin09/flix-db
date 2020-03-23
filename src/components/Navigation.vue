@@ -21,10 +21,9 @@
           <nav-item
             v-for="(item, index) in menu"
             :key="index"
-            :menuItem="menu[index].name"
+            :menuItem="item"
             :subItems="menu[index].subItems"
-          >
-          </nav-item>
+          ></nav-item>
         </ul>
       </div>
 
@@ -33,9 +32,8 @@
           <nav-item
             v-for="(item, index) in userMenu"
             :key="index"
-            :menuItem="userMenu[index].name"
-          >
-          </nav-item>
+            :menuItem="item"
+          ></nav-item>
         </ul>
       </div>
     </nav>
@@ -46,15 +44,30 @@
 import navItem from "@/components/NavItems.vue";
 import search from "@/components/Search.vue";
 import config from "@/config/menu.json";
+import { mapGetters } from "vuex";
 export default {
   components: {
     navItem,
     search
   },
+  computed: {
+    ...mapGetters({
+      user: "user"
+    }),
+    userMenu() {
+      const isLoggedIn = this.user && this.user.loggedIn ? true : false;
+      let filteredMenu = [];
+      config.userMenu.forEach(menu => {
+        if (menu.isLoggedIn === isLoggedIn) {
+          filteredMenu.push(menu);
+        }
+      });
+      return filteredMenu;
+    }
+  },
   data() {
     return {
-      menu: config.menu,
-      userMenu: config.userMenu
+      menu: config.menu
     };
   }
 };

@@ -10,6 +10,8 @@
         "signUp": "Sign Up",
         "top_rated": "Top Rated",
         "tv": "TV Shows",
-        "upcoming": "Up Coming"
+        "upcoming": "Up Coming",
+        "signOut": "Sign Out",
+        "user": "User"
     }
 }

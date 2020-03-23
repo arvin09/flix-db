@@ -2,15 +2,18 @@
   <li class="nav-item dropdown">
     <a
       class="nav-link dropdown-toggle"
+      :class="menuItem.name"
       href="#"
       id="moiveDropdown"
       role="button"
       aria-haspopup="true"
       aria-expanded="false"
     >
-      <span v-if="hasSubtems">{{ getUpperCaseMenuName }} </span>
+      <span v-if="hasSubtems" @click="isSignOut ? signOutClick() : null"
+        >{{ getMenuName }}
+      </span>
       <router-link v-else :to="mainMenu" class="nav-link">
-        {{ getUpperCaseMenuName }}
+        {{ getMenuName }}
       </router-link>
     </a>
     <div class="dropdown-menu" aria-labelledby="moiveDropdown">
@@ -28,12 +31,15 @@
 </template>
 <script>
 import labels from "@/config/labels.json";
+import { mapGetters } from "vuex";
+import firebase from "firebase";
+
 export default {
   name: "nav-item",
   props: {
     menuItem: {
-      type: String,
-      default: ""
+      type: Object,
+      default: () => ({})
     },
     subItems: {
       type: Array,
@@ -45,22 +51,44 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      user: "user"
+    }),
+    isSignOut() {
+      return this.menuItem.name === "signOut";
+    },
     hasSubtems() {
-      return this.subItems.length;
+      return this.subItems.length || this.menuItem.isLoggedIn;
     },
     mainMenu() {
-      return `/${this.menuItem.toLowerCase()}`;
+      return `/${this.menuItem.name.toLowerCase()}`;
     },
-    getUpperCaseMenuName() {
-      return labels["en"][this.menuItem].toUpperCase();
+    getMenuName() {
+      const name =
+        this.menuItem.name !== "user"
+          ? labels["en"][this.menuItem.name]
+          : this.user && this.user.data && this.user.data.displayName
+          ? this.user.data.displayName
+          : "";
+      return name.toUpperCase();
     }
   },
   methods: {
+    signOutClick() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({ name: "login" });
+          // TODO: debug for this work around
+          window.location.reload();
+        });
+    },
     getSubMenuItem(item) {
       return labels["en"][item];
     },
     getRouterLink(item) {
-      return `/${this.menuItem.toLowerCase()}/${item
+      return `/${this.menuItem.name.toLowerCase()}/${item
         .toLowerCase()
         .replace(/ +?/g, "")}`;
     }

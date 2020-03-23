@@ -27,10 +27,20 @@
     ],
     "userMenu": [
         {
-            "name": "login"
+            "name": "login",
+            "isLoggedIn": false
         },
         {
-            "name": "signUp"
+            "name": "signUp",
+            "isLoggedIn": false
+        },
+        {
+            "name": "user",
+            "isLoggedIn": true
+        },
+        {
+            "name": "signOut",
+            "isLoggedIn": true
         }
     ]
 }
