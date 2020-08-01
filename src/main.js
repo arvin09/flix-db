@@ -8,6 +8,8 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+const user = null;
+
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: process.env.VUE_APP_FIREBASE_AUTHDOMAIN,
@@ -24,6 +26,20 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch("fetchUser", user);
+  }
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (user) {
+      next({
+        path: "/login"
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
   }
 });
 
